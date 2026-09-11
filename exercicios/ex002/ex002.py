@@ -26,6 +26,8 @@ g1 = Gafanhoto('Guilherme', 13)
 g1.aniversario()
 print(g1)
 
+print(g1.__class__)
+
 print(g1.__dict__)
 print(g1.__getstate__())
 
