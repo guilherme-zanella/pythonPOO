@@ -7,28 +7,25 @@ class Gamer:
         self.nick = nick
         self.jogos = []
 
-    def add_favorite(self, jogo):
+    def add_favorito(self, jogo):
         self.jogos.append(jogo)
+        self.jogos = sorted(self.jogos)
 
     def ficha(self):
         conteudo = (
-            f'Nome real: [black on blue]{self.nome}[/]\n'
+            f'Nome real: [black on blue] {self.nome} [/]\n'
             f'Jogos favoritos:'
         )
         for j in self.jogos:
             conteudo += f'\n :video_game: [blue]{j}[/]'
 
-        caixa = Panel(conteudo,
-                    title=f'Jogador <{self.nick}>',
-                    width=50
-                    )
-        print(caixa)
-
+        painel = Panel(conteudo, title=f'Jogador <{self.nick}>', width=50)
+        print(painel)
 
 
 j1 = Gamer('Guilherme Zanella', 'guizim123')
-j1.add_favorite('Fortnite')
-j1.add_favorite('FIFA')
-j1.add_favorite('Brawl stars')
-j1.add_favorite('Rocket league')
+j1.add_favorito('Fortnite')
+j1.add_favorito('FIFA')
+j1.add_favorito('Brawl stars')  
+j1.add_favorito('Rocket league')
 j1.ficha()

@@ -2,7 +2,7 @@ from rich import print
 
 class Caneta:
     def __init__(self, cor):
-        traducao = {
+        cores = {
             'verde': 'green',
             'vermelha': 'red1',
             'azul': 'blue1',
@@ -10,7 +10,7 @@ class Caneta:
             'branca': 'white',
             'amarela': 'yellow1'
         }
-        self.cor = traducao[cor]
+        self.cor = cores[cor]
         self.tampada = True
 
     def destampar(self):
