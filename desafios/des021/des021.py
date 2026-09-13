@@ -1,16 +1,24 @@
 from rich import print
 
 class Caneta:
-    def __init__(self, cor):
-        cores = {
-            'verde': 'green',
-            'vermelha': 'red1',
-            'azul': 'blue1',
-            'preta': 'black',
-            'branca': 'white',
-            'amarela': 'yellow1'
-        }
-        self.cor = cores[cor]
+    def __init__(self, cor = 'azul'):
+        match cor.lower().strip():
+            case 'azul':
+                escolha = 'blue1'
+            case 'vermelho' | 'vermelha':
+                escolha = 'red1'
+            case 'verde':
+                escolha = 'green'
+            case 'preto' | 'preta':
+                escolha = 'black'
+            case 'branco' | 'branca':
+                escolha = 'white'
+            case 'amarelo' | 'amarela':
+                escolha = 'yellow'
+            case _:
+                escolha = 'white'
+
+        self.cor = escolha
         self.tampada = True
 
     def destampar(self):
@@ -21,9 +29,9 @@ class Caneta:
 
     def escrever(self, texto):
         if self.tampada:
-            print(f':prohibited: A [{self.cor}]caneta[/] está tampada! ', end='')
+            print(f':prohibited: A [{self.cor}]caneta [/] está tampada! ', end='')
         else:
-            print(f'[{self.cor}]{texto}[/]', end='')
+            print(f'[{self.cor}]{texto}[/]', end=' ')
 
     def pular_linha(self, num=1):
         for n in range(num+1):
@@ -38,7 +46,7 @@ c1.destampar()
 c2.destampar()
 c3.destampar()
 
-c1.escrever('Olá, tudo bem? ')
+c1.escrever('Olá, tudo bem?')
 c1.pular_linha(2)
-c2.escrever('Olá, gafanhoto! ')
-c3.escrever('Vamos exercitar! ')
+c2.escrever('Olá, gafanhoto!')
+c3.escrever('Vamos exercitar!')
