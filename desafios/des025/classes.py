@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 class Transporte(ABC):
     def __init__(self, distancia):
         self.distancia = distancia
+        self.frete = 0
 
     @abstractmethod
     def calcular_frete(self):
@@ -15,7 +16,8 @@ class Moto(Transporte):
         super().__init__(distancia)
 
     def calcular_frete(self):
-        return f'R${self.distancia * self.fator:,.2f}'.replace('.', ',')
+        self.frete = self.distancia * Moto.fator
+        return f'R${self.frete:.2f}'
 
 
 class Caminhao(Transporte):
@@ -27,7 +29,8 @@ class Caminhao(Transporte):
         if self.distancia < 50:
             return 'Raio mínimo de 50Km'
         else:
-            return f'R${self.distancia * self.fator:,.2f}'.replace('.', ',')
+            self.frete = self.distancia * Caminhao.fator
+            return f'R${self.frete:.2f}'
 
 
 class Drone(Transporte):
@@ -39,5 +42,6 @@ class Drone(Transporte):
         if self.distancia > 10:
             return 'Raio máximo de 10Km'
         else:
-            return f'R${self.distancia * self.fator:.2f}'.replace('.', ',')
+            self.frete = self.distancia * Drone.fator
+            return f'R${self.frete:.2f}'
         
