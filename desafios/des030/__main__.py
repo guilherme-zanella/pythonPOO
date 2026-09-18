@@ -2,10 +2,12 @@ from classes import *
 from rich import print, inspect
 
 def main():
-    s = Credencial()
-    s.senha = 'abc'
-    inspect(s, private=True)
-    s.verificar_senha()
+    c = Credencial()
+
+    c.senha = 'teste1'
+
+    c.validar('teste1')
+
 
 if __name__ == '__main__':
     main()
