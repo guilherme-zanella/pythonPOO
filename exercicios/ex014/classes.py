@@ -1,0 +1,26 @@
+from functools import singledispatchmethod
+
+class Analisador:
+    @singledispatchmethod
+    def analisar(self, valor):
+        print(f'Não foi possível analisar o valor {valor}')
+
+    @analisar.register
+    def _(self, valor: int):
+        print(f'{valor} é um número inteiro')
+
+    @analisar.register
+    def _(self, valor: float):
+        print(f'{valor} é um número real')
+
+    @analisar.register
+    def _(self, valor: str):
+        print(f'"{valor}" é uma string')
+
+    @analisar.register
+    def _(self, valor: tuple|list|dict):
+        print(f'{valor} é uma lista de dados')
+
+    @analisar.register
+    def _(self, valor: bool):
+        print(f'{valor} é um valor boleano')
