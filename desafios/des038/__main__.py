@@ -12,7 +12,7 @@ def main():
     c1 = c1 + p1
 
 
-    print(c1)
+    inspect(c1)
 
 
 if __name__ == '__main__':

@@ -28,6 +28,10 @@ class Carrinho:
         
 
     def __iadd__(self, produto):
-        self.produtos.append(produto)
-        self.total += produto.preco
-        return self
+        if produto.__class__.__name__ == 'Produto':
+            self.produtos.append(produto)
+            self.total += produto.preco
+            return self
+        elif produto.__class__.__name__:
+            for i in produto.produtos:
+                self.produtos.append(i)
