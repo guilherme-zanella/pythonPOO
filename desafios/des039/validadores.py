@@ -33,11 +33,13 @@ class Senha(Validador):
     def validar(self, valor):
 
         caracteres = '!@#$%^&*()+-=[]{}|;:",./<>?`~_'
+        numeros = '1234567890'
 
         if len(valor) >= 8:
             estado = True
             maisculas = 0
             simbolos = 0
+            num = 0
 
             for l in valor:
                 if l != l.lower():
@@ -46,11 +48,15 @@ class Senha(Validador):
                     simbolos += 1
                 if l == ' ':
                     estado = False
+                if l in numeros:
+                    num += 1
                          
             if maisculas == 0:
                 estado = False  
             if simbolos == 0:
-                estado = False    
+                estado = False 
+            if num == 0:
+                estado = False   
 
         else:
             estado = False

@@ -1,7 +1,7 @@
 from validadores import *
 
 def main():
-    validar_dado(Email(), 'guiherme-7206192@estudante.rs.gov.br')
+    validar_dado(Senha(), 'Guilherme@1234')
 
 
 if __name__ == '__main__':
