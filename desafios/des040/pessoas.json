@@ -1,0 +1,15 @@
+[
+    {
+        "nome": "Guilherme",
+        "email": "guilherme@gmail.com"
+    },
+    {
+        "nome": "Manuela",
+        "email": "Manuzinha@gmail.com"
+    },
+    {
+        "nome": "Marcos",
+        "curso": "CNC",
+        "serie": "192"
+    }
+]
