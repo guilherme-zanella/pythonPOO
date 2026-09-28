@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import re
 
 class Validador(ABC):
 
@@ -10,94 +11,36 @@ class Validador(ABC):
 class Usuario(Validador):
 
     def validar(self, valor:str):
-
-        caracteres = '!@#$%^&*()+-=[]{}|;:",./<>?`~'
-
-        if 5 <= len(valor) <= 20:
-            estado = True
-            for l in valor:
-                if l != l.lower():
-                    estado = False
-                if l in caracteres:
-                    estado = False
-                if l == ' ':
-                    estado = False
+        regex = r'^[a-z0-9_]{5,20}$'
+        if re.fullmatch(regex, valor):
+            return True
         else:
-            estado = False
-
-        return estado
+            return False
 
 
 class Senha(Validador):
 
     def validar(self, valor):
-
-        caracteres = '!@#$%^&*()+-=[]{}|;:",./<>?`~_'
-        numeros = '1234567890'
-
-        if len(valor) >= 8:
-            estado = True
-            maisculas = 0
-            simbolos = 0
-            num = 0
-
-            for l in valor:
-                if l != l.lower():
-                    maisculas += 1
-                if l in caracteres:
-                    simbolos += 1
-                if l == ' ':
-                    estado = False
-                if l in numeros:
-                    num += 1
-                         
-            if maisculas == 0:
-                estado = False  
-            if simbolos == 0:
-                estado = False 
-            if num == 0:
-                estado = False   
-
+        regex = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@!#$%&?/|\=+-_,.]).{8,}$'
+        if re.fullmatch(regex, valor):
+            return True
         else:
-            estado = False
-
-        return estado
+            return False
 
 
 class Email(Validador):
 
     def validar(self, valor):
-        estado = True
+        regex = r'^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z0-9]{2,}$'
+        if re.fullmatch(regex, valor):
+            return True
+        else:
+            return False
 
-        caracteres = '!#$%^&*()=[]{}|;:",/<>?`~ '
-        arrobas = 0
-        pontos = 0
 
-        for i, l in enumerate(valor):
-            if l == '@':
-                if i != 0:
-                    arrobas += 1
-            if l in caracteres:
-                estado = False
-            if l == '.':
-                if arrobas != 0:
-                    pontos += 1
-            if l == ' ':
-                estado = False
-
-        if len(valor.split('.')[-1]) < 2:
-            estado = False
-        if arrobas != 1:
-            estado = False
-        if pontos == 0:
-            estado = False
-
-        return estado
             
-
-
 def validar_dado(classe, valor):
-    estado = classe.validar(valor)
+    resultado = classe.validar(valor)
     
-    print(f'Valor: {valor} é valido? {'SIM' if estado else 'NÃO'}')
+    print(f'Valor: {valor} é valido? {'SIM' if resultado else 'NÃO'}')
 
