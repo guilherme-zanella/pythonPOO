@@ -1,7 +1,7 @@
 from classes import *
 
 def main():
-    finalizar_compra(CartaoCredito(), 2000)
+    finalizar_pagamento(CartaoCredito(), 2000)
 
 
 if __name__ == '__main__':
