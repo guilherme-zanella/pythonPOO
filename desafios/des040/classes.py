@@ -1,5 +1,3 @@
-import json
-
 class Aluno:
 
     def __init__(self, nome, curso, serie):
@@ -18,30 +16,39 @@ class Usuario:
 class JSON:
     
     def exportar(self, lista):
+        import json
+
         lista_pessoas = []
-        conteudo = {}
         for v in lista:
-            conteudo = {}
-
-            if v.__class__.__name__ == 'Usuario':
-                conteudo.update({'nome': v.nome})
-                conteudo.update({'email': v.email})
-
-            if v.__class__.__name__ == 'Aluno':
-                conteudo.update({'nome': v.nome})
-                conteudo.update({'curso': v.curso})
-                conteudo.update({'serie': v.serie})
-
-            lista_pessoas.append(conteudo)
+            lista_pessoas.append(v.__dict__)
 
         with open('desafios/des040/pessoas.json', 'w', encoding='utf-8') as arq:
             json.dump(lista_pessoas, arq, indent=4, ensure_ascii=False)
 
         with open('desafios/des040/pessoas.json', 'r', encoding='utf-8') as arq:
             dados = json.load(arq)
-            print(json.dumps(dados, indent=4, ensure_ascii=False))
+            return json.dumps(dados, indent=4, ensure_ascii=False)
+
+
+class XML:
+
+    def exportar(self, lista):
+        import xml.etree.ElementTree as ET
+
+        nome = lista[0].__class__.__name__.lower()
+        pai = ET.Element('dados')
+
+        for elemento in lista:
+            filho = ET.SubElement(pai, nome)
+            for c, v in elemento.__dict__.items():
+                neto = ET.SubElement(filho, c)
+                neto.text = str(v)
+
+        ET.indent(pai, space='\t')
+        txt = ET.tostring(pai, encoding='unicode', xml_declaration=True)
+        return txt
 
 
 
-def exportar_dados(objeto, lista):
-    objeto.exportar(lista)
+def exportar_dados(formato, lista):
+    print(formato.exportar(lista))

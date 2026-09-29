@@ -7,7 +7,7 @@ def main():
         Aluno('Marcos', 'CNC', '192')
     ]
 
-    exportar_dados(JSON(), l)
+    exportar_dados(XML(), l)
 
 
 if __name__ == '__main__':
